@@ -18,20 +18,20 @@
        
   
 
-  ![网关](img\GW.PNG)    
+  ![网关](img/GW.PNG)    
 * 网卡配置：  
     * 网卡1：NAT网络（理由同上）  
     * 网卡2：Host-only网络（连putty方便操作）  
     * 网卡3：intnet1(跟debian和XP1一个局域网)
     * 网卡4：intnet2（跟kali和XP2一个局域网）  
 
-![kali靶机](img\VK.PNG)  
+![kali靶机](img/VK.PNG)  
 * 网卡配置： 内部网络intnet2(Windows XP2跟这个配置一样，就不赘述了)   
   
-![Windows XP1](img\XP1.PNG)   
+![Windows XP1](img/XP1.PNG)   
 * 网卡配置：内部网络intnet1(配置网卡的时候点开高级选项，选PCent-FAST Ⅲ，如果是默认选项，XP的驱动不支持，所以选这个)    
 
-![debian靶机](img\VD.PNG)  
+![debian靶机](img/VD.PNG)  
   * 网卡配置：内部网络intnet1    
 
 * **配置网络**  
@@ -81,7 +81,7 @@
   ```   
   修改完配置文件之后重启网卡，使用```/sbin/ifup 网卡名称```命令   
   效果：  
-  ![网关网络配置](img\GW-network.PNG)   
+  ![网关网络配置](img/GW-network.PNG)   
     * 安装dnsmasq，为网关配置dhcp和dns服务  
     ```  
         apt-get update  
@@ -101,64 +101,64 @@
     > #log-dhcp  
     ```
     启动dnsmasq服务，如下图：  
-    ![dnsamsq](img\dnsmasq.PNG)
+    ![dnsamsq](img/dnsmasq.PNG)
     * 查看各个靶机是否获得ip地址  
         * victim-kali 172.16.222.140 
-        ![](img\VK-network.PNG)  
+        ![](img/VK-network.PNG)  
         * victim-XP2 172.16.222.122  
-        ![](img\XP2network.PNG)  
+        ![](img/XP2network.PNG)  
         * victim-XP1  172.16.111.132
-        ![](img\XP-network.PNG)  
+        ![](img/XP-network.PNG)  
         * victim-debian  172.16.111.141
-        ![](img\vd-network.PNG)
+        ![](img/vd-network.PNG)
     
 
 * **测试网络连通性** （有段时间电脑太卡，所以直接上手机拍了） 
     - [x] 靶机可以直接访问攻击者主机（每个局域网选一台机器）  
       * intnet1内的victim-XP1
-    ![](img\XPpingAK.PNG)   
+    ![](img/XPpingAK.PNG)   
       * intnet2内的victim-kali
-    ![](img\VK-AK.PNG)  
+    ![](img/VK-AK.PNG)  
     - [x] 攻击者主机无法直接访问靶机（每个局域网选一台机器）  
       * intnet1内的victim-XP1
-    ![](img\AKpingXP.PNG)  
+    ![](img/AKpingXP.PNG)  
       *  intnet2内的victim-kali 
-    ![](img\AK-VK.PNG)  
+    ![](img/AK-VK.PNG)  
     - [x] 网关可以直接访问攻击者主机和靶机   
       * 访问intnet2内的victim-kali  
 
-      ![](img\GWpingVK.PNG)   
+      ![](img/GWpingVK.PNG)   
       * 访问intnet1内的victim-XP1  
 
-      ![](img\GWpingXP1.PNG)  
+      ![](img/GWpingXP1.PNG)  
       * 访问攻击者主机attacker-kali  
 
-      ![](img\GWpingAK.PNG)  
+      ![](img/GWpingAK.PNG)  
     - [x] 靶机的所有对外上下行流量必须经过网关  
       * enp0s10的流量   
 
-      ![](img\VKflow.PNG)  
+      ![](img/VKflow.PNG)  
       * enp0s9的流量    
 
-    ![](img\XP1flow.PNG)  
+    ![](img/XP1flow.PNG)  
     - [x] 所有节点均可以访问互联网
     * victim-debian  
 
-    ![](img\VdPingBaidui.PNG)  
+    ![](img/VdPingBaidui.PNG)  
     * victim-kali  
 
-    ![](img\VKpingBAIDU.PNG)  
+    ![](img/VKpingBAIDU.PNG)  
     * victim-XP1  
-    ![](img\XPpingBAIDU.PNG)  
+    ![](img/XPpingBAIDU.PNG)  
     * victim-XP2 
 
-    ![](img\XP2-NETWORK.PNG)   
+    ![](img/XP2-NETWORK.PNG)   
     * gateway-debian3 
 
-    ![](img\GW-BAIDU.PNG)   
+    ![](img/GW-BAIDU.PNG)   
     * attacker-kali  
     
-    ![](img\AK-BAIDU.PNG)
+    ![](img/AK-BAIDU.PNG)
 * **问题及解决方式**  
   * 安装debian启动后黑屏  
     * 解决：Debian Buster安装完成前设置GRUB安装位置为/dev/sda  
@@ -179,7 +179,7 @@
     * 解决：还以为是网络配置的问题，后来突然想起没有关Windows XP主机的防火墙。。。（我真傻，真的）  
   * 所有kali主机启动一次后就不能正常启动了,重装后也是相同结果  
     * 描述：上网查是显卡驱动的问题，进行如下操作：  
-    ![](img\SOLVE.PNG)    
+    ![](img/SOLVE.PNG)    
     没有效果，听从老师的建议更新vbox版本后成功解决。  
 * **参考资料**   
   * 老师对同学疑问的解答  
